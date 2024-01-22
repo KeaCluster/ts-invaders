@@ -4,6 +4,7 @@
 
 - [About](#about)
 - [Idk](#idk)
+- [Clause](#clause)
 
 <!-- tocstop -->
 
@@ -12,7 +13,7 @@
 Space invaders but with TypeScript
 
 - Vanilla TS practice
-- Refactor and migration from og project: [spaceInvaders](https://github.com/KeaCluster/spaceInvaders) from a few years back
+- Refactor and migration from [og project](https://github.com/KeaCluster/spaceInvaders) from a few years back
 - Overdue
 - Might keep it simple and clean
 - Might not and add more stuff
@@ -20,3 +21,9 @@ Space invaders but with TypeScript
 ## Idk
 
 Copy it or just check out the code, do your thing.
+
+## Clause
+
+I do not own the Space Invaders IP.
+
+If you copy my code you will have to buy me a beer if we ever meet in person.
