@@ -3,6 +3,7 @@
 <!-- toc -->
 
 - [About](#about)
+- [To do](#to-do)
 - [Idk](#idk)
 - [Clause](#clause)
 
@@ -17,6 +18,10 @@ Space invaders but with TypeScript
 - Overdue
 - Might keep it simple and clean
 - Might not and add more stuff
+
+## To do
+
+1. Some shared methods can be refactored
 
 ## Idk
 
