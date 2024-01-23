@@ -1,3 +1,5 @@
+import BulletController from '../controllers/BulletController';
+
 export default class Player {
   private leftPressed: boolean = false;
   private shootPressed: boolean = false;
@@ -33,5 +35,47 @@ export default class Player {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
+  private collideWithWalls(): void {
+    if (this.x < 0) {
+      this.x = 0;
+    } else if (this.x > this.canvas.width - this.width) {
+      this.x = this.canvas.width - this.width;
+    }
+  }
+
+  private move(): void {
+    if (this.rightPressed) this.x += this.velocity;
+    if (this.leftPressed) this.x -= this.velocity;
+  }
+
+  // ya know this makes sense
+
+  private keydown = (event: KeyboardEvent): void => {
+    switch (event.code) {
+      case 'ArrowRight':
+        this.rightPressed = true;
+        break;
+      case 'ArrowLeft':
+        this.leftPressed = true;
+        break;
+      case 'Space':
+        this.shootPressed = true;
+        break;
+    }
+
+  }
+  private keyup = (event: KeyboardEvent): void => {
+    switch (event.code) {
+      case 'ArrowRight':
+        this.rightPressed = false;
+        break;
+      case 'ArrowLeft':
+        this.leftPressed = false;
+        break;
+      case 'Space':
+        this.shootPressed = false;
+        break;
+    }
+  }
 
 }
