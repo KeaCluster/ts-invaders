@@ -1,30 +1,31 @@
 import BulletController from '../controllers/BulletController';
 
 export default class Player {
+  private readonly width: number = 40;
+  private readonly height: number = 48;
   private leftPressed: boolean = false;
   private shootPressed: boolean = false;
   private rightPressed: boolean = false;
-  private x: number;
-  private y: number;
-  private readonly width: number = 40;
-  private readonly height: number = 48;
   private image: HTMLImageElement;
-
-  // this shit is so weird man lmao
+  private _x: number;
+  private _y: number;
 
   constructor(
     private canvas: HTMLCanvasElement,
     private velocity: number,
     private bulletController: BulletController
   ) {
-    this.x = this.canvas.width / 2;
-    this.y = this.canvas.height - 72;
+    this._x = this.canvas.width / 2;
+    this._y = this.canvas.height - 72;
     this.image = new Image();
     this.image.src = '../assets/images/player.png';
 
     document.addEventListener('keydown', this.keydown)
     document.addEventListener('keyup', this.keyup)
   }
+
+  get x() { return this._x }
+  get y() { return this._y }
 
   draw(ctx: CanvasRenderingContext2D): void {
     this.move();
@@ -36,16 +37,16 @@ export default class Player {
   }
 
   private collideWithWalls(): void {
-    if (this.x < 0) {
-      this.x = 0;
-    } else if (this.x > this.canvas.width - this.width) {
-      this.x = this.canvas.width - this.width;
+    if (this._x < 0) {
+      this._x = 0;
+    } else if (this._x > this.canvas.width - this.width) {
+      this._x = this.canvas.width - this.width;
     }
   }
 
   private move(): void {
-    if (this.rightPressed) this.x += this.velocity;
-    if (this.leftPressed) this.x -= this.velocity;
+    if (this.rightPressed) this._x += this.velocity;
+    if (this.leftPressed) this._x -= this.velocity;
   }
 
   // ya know this makes sense
