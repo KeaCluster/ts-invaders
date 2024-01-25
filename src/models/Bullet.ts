@@ -1,6 +1,6 @@
 export default class Bullet {
-  private readonly width: number = 5;
-  private readonly height: number = 20;
+  private readonly _width: number = 5;
+  private readonly _height: number = 20;
 
   private _x: number;
   private _y: number;
@@ -17,6 +17,8 @@ export default class Bullet {
 
   get x(): number { return this._x }
   get y(): number { return this._y }
+  get width(): number { return this._width }
+  get height(): number { return this._height }
 
   draw(ctx: CanvasRenderingContext2D): void {
     this._y -= this.velocity;
@@ -24,7 +26,7 @@ export default class Bullet {
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
-  collideWidth(sprite: { x: number; y: number; width: number; height: number; }): boolean {
+  collideWith(sprite: { x: number; y: number; width: number; height: number; }): boolean {
     return this.x + this.width > sprite.x &&
       this.x < sprite.x + sprite.width &&
       this.y + this.height > sprite.y &&
