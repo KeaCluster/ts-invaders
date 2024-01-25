@@ -10,8 +10,6 @@ export default class Player {
   private _x: number;
   private _y: number;
 
-  // this shit is so weird man lmao
-
   constructor(
     private canvas: HTMLCanvasElement,
     private velocity: number,
