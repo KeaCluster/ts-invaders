@@ -30,7 +30,7 @@ export default class Enemy {
     this._y += yVelocity;
   }
 
-  collideWidth(sprite: Bullet) {
+  collideWith(sprite: Bullet) {
     return this._x + this._width > sprite.x &&
       this._x < sprite.x + sprite.width &&
       this._y + this.height > sprite.y &&
