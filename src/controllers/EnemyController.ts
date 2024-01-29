@@ -23,7 +23,7 @@ export default class EnemyController {
     private enemyBulletController: BulletController,
     private playerBulletController: BulletController,
   ) {
-    this.enemyDeathSound = new Audio('../assets/sounds/enemy-death.wav');
+    this.enemyDeathSound = new Audio('/src/assets/sounds/enemy-death.wav');
     this.enemyDeathSound.volume = 0.2;
     this.enemyMap = createEnemyMap();
     this.createEnemies();

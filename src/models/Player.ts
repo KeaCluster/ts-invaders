@@ -18,7 +18,7 @@ export default class Player {
     this._x = this.canvas.width / 2;
     this._y = this.canvas.height - 72;
     this.image = new Image();
-    this.image.src = '../assets/images/player.png';
+    this.image.src = '/src/assets/images/player.png';
 
     document.addEventListener('keydown', this.keydown)
     document.addEventListener('keyup', this.keyup)
