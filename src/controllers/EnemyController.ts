@@ -20,9 +20,6 @@ export default class EnemyController {
 
   constructor(
     private canvas: HTMLCanvasElement,
-    private maxBullets: number,
-    private bulletColor: string,
-    private soundEnabled: boolean,
     private enemyBulletController: BulletController,
     private playerBulletController: BulletController,
   ) {
