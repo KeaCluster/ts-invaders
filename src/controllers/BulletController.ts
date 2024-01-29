@@ -1,4 +1,5 @@
 import Bullet from '../models/Bullet';
+import Enemy from '../models/Enemy';
 
 export default class BulletController {
   bullets: Bullet[];
@@ -25,6 +26,15 @@ export default class BulletController {
     this.bullets = this.bullets.filter(bullet => bullet.y + bullet.width > 0 && bullet.y <= this.canvas.height);
     this.bullets.forEach(bullet => bullet.draw(ctx));
     if (this.timeNextBullet > 0) this.timeNextBullet--;
+  }
+
+  collideWith(sprite: Enemy): boolean {
+    const bulletHitSpriteIndex = this.bullets.findIndex(bullet => bullet.collideWith(sprite));
+    if (bulletHitSpriteIndex >= 0) {
+      this.bullets.splice(bulletHitSpriteIndex, 1);
+      return true;
+    }
+    return false;
   }
 
   shoot = (x: number, y: number, velocity: number, timeBetweenBullets: number): void => {
