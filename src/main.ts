@@ -13,5 +13,5 @@ canvas.height = 600;
 const ctx = canvas.getContext("2d")!;
 
 if (ctx) {
-  setInterval(() => game(ctx), 1000 / 60);
+  setInterval(() => game(canvas, ctx), 1000 / 60);
 }
