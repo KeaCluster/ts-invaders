@@ -32,8 +32,6 @@ export const game = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) =
     playerBulletController.draw(ctx);
     enemyBulletController.draw(ctx);
   }
-
-
 }
 const displayGameOver = (canvas: HTMLCanvasElement): void => {
   if (isGameOver) {
@@ -41,7 +39,7 @@ const displayGameOver = (canvas: HTMLCanvasElement): void => {
     let textOffset: number = didWin ? 3.5 : 5;
     ctx.fillStyle = "white"
     ctx.font = "70px Arial";
-    ctx.fillStyle(text, canvas.width / textOffset, canvas.height / 2);
+    ctx.fillText(text, canvas.width / textOffset, canvas.height / 2);
   }
 }
 
