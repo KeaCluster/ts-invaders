@@ -18,9 +18,9 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
 
     gameState.reset();
 
-    let lastFrameTime: number = 0;
-    const targetFPS: number = 60;
-    const targetFrameTime: number = 1000 / targetFPS;
+    let lastFrameTime = 0;
+    const targetFPS = 60;
+    const targetFrameTime = 1000 / targetFPS;
 
     const gameLoop = (timestamp) => {
       // this is dope
@@ -31,7 +31,7 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
         if (background.complete) {
           ctx.drawImage(background, 0, 0, gameState.canvas.width, gameState.canvas.height);
         }
-        // this does something idk
+
         lastFrameTime = timestamp - (deltaTime % targetFrameTime);
       }
 
