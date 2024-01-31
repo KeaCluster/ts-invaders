@@ -3,6 +3,7 @@ import BulletController from "../controllers/BulletController";
 import EnemyController from "../controllers/EnemyController";
 import Player from "../models/Player";
 
+
 const background = new Image();
 background.src = '/src/assets/images/background.jpg';
 
@@ -17,7 +18,23 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
 
     gameState.reset();
 
-    const gameLoop = () => {
+    let lastFrameTime: number = 0;
+    const targetFPS: number = 60;
+    const targetFrameTime: number = 1000 / targetFPS;
+
+    const gameLoop = (timestamp) => {
+      // this is dope
+      const deltaTime = timestamp - lastFrameTime;
+
+      if (deltaTime >= targetFrameTime) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (background.complete) {
+          ctx.drawImage(background, 0, 0, gameState.canvas.width, gameState.canvas.height);
+        }
+        // this does something idk
+        lastFrameTime = timestamp - (deltaTime % targetFrameTime);
+      }
+
       if (!gameState.isGameOver) {
         renderGame(ctx, gameState, player, enemyController, playerBulletController, enemyBulletController);
         requestAnimationFrame(gameLoop);
@@ -25,15 +42,13 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
         displayGameOver(ctx, gameState);
       }
     }
-
     // this is the entry point for the gameLoop
-    gameLoop();
+    requestAnimationFrame(gameLoop);
   })
 }
 
 const loadAssets = async (): Promise<void> => {
-  const backgroundLoaded = new Promise<void>(_ => background.onload = () => _());
-  await backgroundLoaded;
+  await new Promise<void>(_ => background.onload = () => _());
 }
 
 
