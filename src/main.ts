@@ -1,5 +1,5 @@
 import './styles/style.css'
-import { game } from './utils/game';
+import { startGame } from './utils/game';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -10,8 +10,8 @@ const canvas = document.getElementById("game") as HTMLCanvasElement;
 canvas.width = 600;
 canvas.height = 600;
 
-const ctx = canvas.getContext("2d")!;
+const ctx = canvas.getContext("2d");
 
 if (ctx) {
-  setInterval(() => game(canvas, ctx), 1000 / 60);
+  startGame(canvas, ctx);
 }

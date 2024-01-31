@@ -19,23 +19,21 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
 
     const gameLoop = () => {
       if (!gameState.isGameOver) {
-        updateGame(gameState, player, enemyController, playerBulletController, enemyBulletController);
         renderGame(ctx, gameState, player, enemyController, playerBulletController, enemyBulletController);
         requestAnimationFrame(gameLoop);
       } else {
         displayGameOver(ctx, gameState);
       }
     }
+
+    // this is the entry point for the gameLoop
+    gameLoop();
   })
 }
 
 const loadAssets = async (): Promise<void> => {
   const backgroundLoaded = new Promise<void>(_ => background.onload = () => _());
   await backgroundLoaded;
-}
-function updateGame(gameState: GameState, player: Player, enemyController: EnemyController, playerBulletController: BulletController, enemyBulletController: BulletController) {
-  // Logic to update game entities and check for game over conditions
-  // This might include moving entities, checking for collisions, etc.
 }
 
 
