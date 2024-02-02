@@ -37,7 +37,7 @@ export default class BulletController {
     return false;
   }
 
-  shoot = (x: number, y: number, velocity: number, timeBetweenBullets: number): void => {
+  shoot(x: number, y: number, velocity: number, timeBetweenBullets: number): void {
     if (this.timeNextBullet <= 0 && this.bullets.length < this.maxBullets) {
       const bullet = new Bullet(x, y, velocity, this.bulletColor);
       this.bullets.push(bullet);

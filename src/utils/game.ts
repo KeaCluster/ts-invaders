@@ -7,7 +7,7 @@ import Player from "../models/Player";
 const background = new Image();
 background.src = '/src/assets/images/background.jpg';
 
-export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): void => {
+export function startGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): void {
   const gameState = new GameState(canvas, ctx);
 
   loadAssets().then(() => {
@@ -22,7 +22,7 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
     const targetFPS = 60;
     const targetFrameTime = 1000 / targetFPS;
 
-    const gameLoop = (timestamp) => {
+    function gameLoop(timestamp: number): void {
       // this is dope
       const deltaTime = timestamp - lastFrameTime;
 
@@ -52,13 +52,13 @@ const loadAssets = async (): Promise<void> => {
 }
 
 
-const renderGame = (
+function renderGame(
   ctx: CanvasRenderingContext2D,
   gameState: GameState,
   player: Player,
   enemyController: EnemyController,
   playerBulletController: BulletController,
-  enemyBulletController: BulletController) => {
+  enemyBulletController: BulletController) {
   if (background.complete) {
     ctx.drawImage(background, 0, 0, gameState.canvas.width, gameState.canvas.height);
   }
@@ -69,7 +69,7 @@ const renderGame = (
   enemyBulletController.draw(ctx);
 }
 
-const displayGameOver = (ctx: CanvasRenderingContext2D, gameState: GameState) => {
+function displayGameOver(ctx: CanvasRenderingContext2D, gameState: GameState) {
   let text = gameState.didWin ? "You Win" : "Game Over";
   let textOffset = gameState.didWin ? 3.5 : 5;
 
