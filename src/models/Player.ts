@@ -50,7 +50,6 @@ export default class Player {
   }
 
   // ya know this makes sense
-
   private keydown = (event: KeyboardEvent): void => {
     switch (event.code) {
       case 'ArrowRight':

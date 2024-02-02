@@ -3,10 +3,11 @@ import BulletController from "../controllers/BulletController";
 import EnemyController from "../controllers/EnemyController";
 import Player from "../models/Player";
 
+
 const background = new Image();
 background.src = '/src/assets/images/background.jpg';
 
-export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): void => {
+export function startGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D): void {
   const gameState = new GameState(canvas, ctx);
 
   loadAssets().then(() => {
@@ -17,7 +18,23 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
 
     gameState.reset();
 
-    const gameLoop = () => {
+    let lastFrameTime = 0;
+    const targetFPS = 60;
+    const targetFrameTime = 1000 / targetFPS;
+
+    function gameLoop(timestamp: number): void {
+      // this is dope
+      const deltaTime = timestamp - lastFrameTime;
+
+      if (deltaTime >= targetFrameTime) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (background.complete) {
+          ctx.drawImage(background, 0, 0, gameState.canvas.width, gameState.canvas.height);
+        }
+
+        lastFrameTime = timestamp - (deltaTime % targetFrameTime);
+      }
+
       if (!gameState.isGameOver) {
         renderGame(ctx, gameState, player, enemyController, playerBulletController, enemyBulletController);
         requestAnimationFrame(gameLoop);
@@ -25,25 +42,22 @@ export const startGame = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext
         displayGameOver(ctx, gameState);
       }
     }
-
     // this is the entry point for the gameLoop
-    gameLoop();
+    requestAnimationFrame(gameLoop);
   })
 }
 
 const loadAssets = async (): Promise<void> => {
-  const backgroundLoaded = new Promise<void>(_ => background.onload = () => _());
-  await backgroundLoaded;
+  await new Promise<void>(_ => background.onload = () => _());
 }
 
-
-const renderGame = (
+function renderGame(
   ctx: CanvasRenderingContext2D,
   gameState: GameState,
   player: Player,
   enemyController: EnemyController,
   playerBulletController: BulletController,
-  enemyBulletController: BulletController) => {
+  enemyBulletController: BulletController) {
   if (background.complete) {
     ctx.drawImage(background, 0, 0, gameState.canvas.width, gameState.canvas.height);
   }
@@ -54,7 +68,7 @@ const renderGame = (
   enemyBulletController.draw(ctx);
 }
 
-const displayGameOver = (ctx: CanvasRenderingContext2D, gameState: GameState) => {
+function displayGameOver(ctx: CanvasRenderingContext2D, gameState: GameState) {
   let text = gameState.didWin ? "You Win" : "Game Over";
   let textOffset = gameState.didWin ? 3.5 : 5;
 
