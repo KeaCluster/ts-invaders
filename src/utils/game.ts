@@ -51,7 +51,6 @@ const loadAssets = async (): Promise<void> => {
   await new Promise<void>(_ => background.onload = () => _());
 }
 
-
 function renderGame(
   ctx: CanvasRenderingContext2D,
   gameState: GameState,

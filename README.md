@@ -15,7 +15,6 @@ Space invaders but with TypeScript
 
 - Vanilla TS
 - Refactor and migration from [og project](https://github.com/KeaCluster/spaceInvaders) from a few years back
-- Overdue
 - Might keep it simple and clean
 - Might not and add more stuff
 
