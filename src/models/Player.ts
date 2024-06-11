@@ -1,4 +1,4 @@
-import BulletController from '../controllers/BulletController';
+import BulletController from "../controllers/BulletController";
 
 export default class Player {
   private readonly width: number = 40;
@@ -13,27 +13,34 @@ export default class Player {
   constructor(
     private canvas: HTMLCanvasElement,
     private velocity: number,
-    private bulletController: BulletController
+    private bulletController: BulletController,
   ) {
     this._x = this.canvas.width / 2;
     this._y = this.canvas.height - 72;
     this.image = new Image();
-    this.image.src = '/src/assets/images/player.png';
+    this.image.src = "/src/assets/images/player.png";
 
-    document.addEventListener('keydown', this.keydown)
-    document.addEventListener('keyup', this.keyup)
+    document.addEventListener("keydown", this.keydown);
+    document.addEventListener("keyup", this.keyup);
   }
 
-  get x() { return this._x }
-  get y() { return this._y }
+  get x() {
+    return this._x;
+  }
+  get y() {
+    return this._y;
+  }
 
   draw(ctx: CanvasRenderingContext2D): void {
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
+
+  update(): void {
     this.move();
     this.collideWithWalls();
     if (this.shootPressed) {
       this.bulletController.shoot(this.x + this.width / 2, this.y, 4, 10);
     }
-    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   private collideWithWalls(): void {
@@ -52,30 +59,33 @@ export default class Player {
   // ya know this makes sense
   private keydown = (event: KeyboardEvent): void => {
     switch (event.code) {
-      case 'ArrowRight':
+      case "ArrowRight":
         this.rightPressed = true;
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         this.leftPressed = true;
         break;
-      case 'Space':
+      case "Space":
         this.shootPressed = true;
         break;
     }
-
-  }
+  };
   private keyup = (event: KeyboardEvent): void => {
     switch (event.code) {
-      case 'ArrowRight':
+      case "ArrowRight":
         this.rightPressed = false;
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         this.leftPressed = false;
         break;
-      case 'Space':
+      case "Space":
         this.shootPressed = false;
         break;
     }
-  }
+  };
 
+  reset(): void {
+    this._x = this.canvas.width / 2;
+    this._y = this.canvas.width - 72;
+  }
 }
