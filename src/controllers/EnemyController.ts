@@ -30,10 +30,13 @@ export default class EnemyController {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
+    this.drawEnemies(ctx);
+  }
+
+  update(): void {
     this.decrementMoveDownTimer();
     this.updateVelocityAndDirection();
     this.collisionDetection();
-    this.drawEnemies(ctx);
     this.resetMoveDownTimer();
     this.fireBullet();
   }
@@ -54,29 +57,16 @@ export default class EnemyController {
   fireBullet(): void {
     this.fireBulletTimer--;
     if (this.fireBulletTimer <= 0) {
-      this.fireBulletTimer = this.fireBulletTimerDefault;
       const allEnemies = this.enemyRows.flat();
       const enemyIndex = Math.floor(Math.random() * allEnemies.length);
       const enemy: Enemy = allEnemies[enemyIndex];
       this.enemyBulletController.shoot(
-        enemy.x,
+        enemy.x + enemy.width / 2,
         enemy.y,
         -3,
-        this.fireBulletTimer,
+        10,
       );
-    }
-  }
-
-  resetMoveDownTimer(): void {
-    if (this.moveDownTimer <= 0) this.moveDownTimer = this.moveDownTimerDefault;
-  }
-
-  decrementMoveDownTimer(): void {
-    if (
-      this.currentDirection === MovingDirection.downLeft ||
-      this.currentDirection === MovingDirection.downRight
-    ) {
-      this.moveDownTimer--;
+      this.fireBulletTimer = this.fireBulletTimerDefault;
     }
   }
 
@@ -142,6 +132,19 @@ export default class EnemyController {
           break;
         }
       }
+    }
+  }
+
+  resetMoveDownTimer(): void {
+    if (this.moveDownTimer <= 0) this.moveDownTimer = this.moveDownTimerDefault;
+  }
+
+  decrementMoveDownTimer(): void {
+    if (
+      this.currentDirection === MovingDirection.downLeft ||
+      this.currentDirection === MovingDirection.downRight
+    ) {
+      this.moveDownTimer--;
     }
   }
 }

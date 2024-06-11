@@ -64,10 +64,46 @@ export class GameEngine {
     }
     if (!this.gameState.isGameOver) {
       this.update(); //tbd
-      this.render(); //tbd
+      this.render();
       requestAnimationFrame(this.gameLoop);
     } else {
-      this.displayGameOver(); // tbd
+      this.displayGameOver();
     }
   };
+
+  private update() {
+    this.enemyController.update();
+    this.player.update(); // tbd
+    this.playerBulletController.update(); // tbd
+    this.enemyBulletController.update(); // tbd
+
+    if (this.enemyBulletController.collideWith(this.player)) {
+      this.handlePlayerGameOver();
+    }
+  }
+  private render() {
+    this.enemyController.draw(this.ctx);
+    this.player.draw(this.ctx);
+    this.playerBulletController.draw(this.ctx);
+    this.enemyBulletController.draw(this.ctx);
+  }
+
+  // to implement on update();
+  private handlePlayerGameOver() {
+    this.gameState.isGameOver = true;
+    this.gameState.didWin = false;
+  }
+
+  private displayGameOver() {
+    let text = this.gameState.didWin ? "You Win" : "Game Over";
+    let textOffset = this.gameState.didWin ? 3.5 : 5;
+
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "70px Arial";
+    this.ctx.fillText(
+      text,
+      this.gameState.canvas.width / textOffset,
+      this.gameState.canvas.height / 2,
+    );
+  }
 }
