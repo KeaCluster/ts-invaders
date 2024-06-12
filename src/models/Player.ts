@@ -1,8 +1,9 @@
 import BulletController from "../controllers/BulletController";
+import { Sprite } from "./Sprite";
 
-export default class Player {
-  private readonly width: number = 40;
-  private readonly height: number = 48;
+export default class Player implements Sprite {
+  private readonly _width: number = 40;
+  private readonly _height: number = 48;
   private leftPressed: boolean = false;
   private shootPressed: boolean = false;
   private rightPressed: boolean = false;
@@ -30,6 +31,12 @@ export default class Player {
   get y() {
     return this._y;
   }
+  get width() {
+    return this._width;
+  }
+  get height() {
+    return this._height;
+  }
 
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -46,8 +53,8 @@ export default class Player {
   private collideWithWalls(): void {
     if (this._x < 0) {
       this._x = 0;
-    } else if (this._x > this.canvas.width - this.width) {
-      this._x = this.canvas.width - this.width;
+    } else if (this._x > this.canvas.width - this._width) {
+      this._x = this.canvas.width - this._width;
     }
   }
 
@@ -83,6 +90,15 @@ export default class Player {
         break;
     }
   };
+
+  collideWith(sprite: Sprite): boolean {
+    return (
+      this.x + this.width > sprite.x &&
+      this.x < sprite.x + sprite.width &&
+      this.y + this.height > sprite.y &&
+      this.y < sprite.y + sprite.height
+    );
+  }
 
   reset(): void {
     this._x = this.canvas.width / 2;

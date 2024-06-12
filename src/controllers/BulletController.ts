@@ -1,5 +1,5 @@
 import Bullet from "../models/Bullet";
-import Enemy from "../models/Enemy";
+import { Sprite } from "../models/Sprite";
 
 export default class BulletController {
   bullets: Bullet[];
@@ -39,7 +39,7 @@ export default class BulletController {
   }
 
   // tbd should update for both Player and Enemy
-  collideWith(sprite: Enemy): boolean {
+  collideWith(sprite: Sprite): boolean {
     const bulletHitSpriteIndex = this.bullets.findIndex((bullet) =>
       bullet.collideWith(sprite),
     );

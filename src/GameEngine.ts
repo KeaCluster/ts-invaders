@@ -63,7 +63,7 @@ export class GameEngine {
       this.lastFrameTime = timestamp - (deltaTime % this.targetFrameTime);
     }
     if (!this.gameState.isGameOver) {
-      this.update(); //tbd
+      this.update();
       this.render();
       requestAnimationFrame(this.gameLoop);
     } else {
@@ -73,9 +73,9 @@ export class GameEngine {
 
   private update() {
     this.enemyController.update();
-    this.player.update(); // tbd
-    this.playerBulletController.update(); // tbd
-    this.enemyBulletController.update(); // tbd
+    this.player.update();
+    this.playerBulletController.update();
+    this.enemyBulletController.update();
 
     if (this.enemyBulletController.collideWith(this.player)) {
       this.handlePlayerGameOver();
