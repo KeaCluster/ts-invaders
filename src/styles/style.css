@@ -21,8 +21,22 @@ a {
 
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   place-items: center;
+  background-image: linear-gradient(
+    to right top,
+    #580387,
+    #3b1273,
+    #22145c,
+    #0f1144,
+    #07072c
+  );
+}
+
+main {
   min-width: 320px;
   min-height: 100vh;
 }

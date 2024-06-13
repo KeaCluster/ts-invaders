@@ -13,7 +13,7 @@
 
 Space invaders but with TypeScript
 
-- Vanilla TS
+- TS
 - Refactor and migration from [og project](https://github.com/KeaCluster/spaceInvaders) from a few years back
 - Might keep it simple and clean
 - Might not and add more stuff
@@ -22,10 +22,10 @@ Space invaders but with TypeScript
 
 1. Some shared methods can be refactored
 2. Maybe an algorithm to make enemies appear with a pyramid-like internal structure
-  a. Something like heavy infantry at the center or stuff like that.
+   a. Something like heavy infantry at the center or stuff like that.
 3. Levels
-  a. Algorithm should adjust to levels
-  b. What the [] am I even saying
+   a. Algorithm should adjust to levels
+   b. What the [] am I even saying
 4. lmao this is delusional
 
 ## Idk
