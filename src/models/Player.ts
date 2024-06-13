@@ -4,10 +4,10 @@ import { Sprite } from "./Sprite";
 export default class Player implements Sprite {
   private readonly _width: number = 40;
   private readonly _height: number = 48;
-  private leftPressed: boolean = false;
-  private shootPressed: boolean = false;
-  private rightPressed: boolean = false;
-  private image: HTMLImageElement;
+  private _leftPressed: boolean = false;
+  private _shootPressed: boolean = false;
+  private _rightPressed: boolean = false;
+  private _image: HTMLImageElement;
   private _x: number;
   private _y: number;
 
@@ -18,8 +18,8 @@ export default class Player implements Sprite {
   ) {
     this._x = this.canvas.width / 2;
     this._y = this.canvas.height - 72;
-    this.image = new Image();
-    this.image.src = "/src/assets/images/player.png";
+    this._image = new Image();
+    this._image.src = "/assets/images/player.png";
 
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);
@@ -39,13 +39,13 @@ export default class Player implements Sprite {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this._image, this.x, this.y, this.width, this.height);
   }
 
   update(): void {
     this.move();
     this.collideWithWalls();
-    if (this.shootPressed) {
+    if (this._shootPressed) {
       this.bulletController.shoot(this.x + this.width / 2, this.y, 4, 10);
     }
   }
@@ -59,34 +59,34 @@ export default class Player implements Sprite {
   }
 
   private move(): void {
-    if (this.rightPressed) this._x += this.velocity;
-    if (this.leftPressed) this._x -= this.velocity;
+    if (this._rightPressed) this._x += this.velocity;
+    if (this._leftPressed) this._x -= this.velocity;
   }
 
   // ya know this makes sense
   private keydown = (event: KeyboardEvent): void => {
     switch (event.code) {
       case "ArrowRight":
-        this.rightPressed = true;
+        this._rightPressed = true;
         break;
       case "ArrowLeft":
-        this.leftPressed = true;
+        this._leftPressed = true;
         break;
       case "Space":
-        this.shootPressed = true;
+        this._shootPressed = true;
         break;
     }
   };
   private keyup = (event: KeyboardEvent): void => {
     switch (event.code) {
       case "ArrowRight":
-        this.rightPressed = false;
+        this._rightPressed = false;
         break;
       case "ArrowLeft":
-        this.leftPressed = false;
+        this._leftPressed = false;
         break;
       case "Space":
-        this.shootPressed = false;
+        this._shootPressed = false;
         break;
     }
   };
