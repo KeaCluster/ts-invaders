@@ -1,8 +1,8 @@
-import MovingDirection from '../utils/MovingDirection.ts';
-import Enemy from '../models/Enemy.ts';
-import Bullet from '../models/Bullet.ts';
-import { createEnemyMap } from '../utils/enemyMap.ts';
-import BulletController from './BulletController.ts';
+import MovingDirection from "../utils/MovingDirection.ts";
+import Enemy from "../models/Enemy.ts";
+import Bullet from "../models/Bullet.ts";
+import { createEnemyMap } from "../utils/enemyMap.ts";
+import BulletController from "./BulletController.ts";
 
 export default class EnemyController {
   private enemyMap: number[][];
@@ -23,23 +23,26 @@ export default class EnemyController {
     private enemyBulletController: BulletController,
     private playerBulletController: BulletController,
   ) {
-    this.enemyDeathSound = new Audio('/src/assets/sounds/enemy-death.wav');
+    this.enemyDeathSound = new Audio("/assets/sounds/enemy-death.wav");
     this.enemyDeathSound.volume = 0.2;
     this.enemyMap = createEnemyMap();
     this.createEnemies();
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
+    this.drawEnemies(ctx);
+  }
+
+  update(): void {
     this.decrementMoveDownTimer();
     this.updateVelocityAndDirection();
     this.collisionDetection();
-    this.drawEnemies(ctx);
     this.resetMoveDownTimer();
     this.fireBullet();
   }
 
   collisionDetection(): void {
-    this.enemyRows.forEach(enemyRow => {
+    this.enemyRows.forEach((enemyRow) => {
       enemyRow.forEach((enemy, enemyIndex) => {
         if (this.playerBulletController.collideWith(enemy)) {
           this.enemyDeathSound.currentTime = 0;
@@ -48,27 +51,22 @@ export default class EnemyController {
         }
       });
     });
-    this.enemyRows = this.enemyRows.filter(enemyRow => enemyRow.length > 0);
+    this.enemyRows = this.enemyRows.filter((enemyRow) => enemyRow.length > 0);
   }
 
   fireBullet(): void {
     this.fireBulletTimer--;
     if (this.fireBulletTimer <= 0) {
-      this.fireBulletTimer = this.fireBulletTimerDefault;
       const allEnemies = this.enemyRows.flat();
       const enemyIndex = Math.floor(Math.random() * allEnemies.length);
       const enemy: Enemy = allEnemies[enemyIndex];
-      this.enemyBulletController.shoot(enemy.x, enemy.y, -3, this.fireBulletTimer);
-    }
-  }
-
-  resetMoveDownTimer(): void {
-    if (this.moveDownTimer <= 0) this.moveDownTimer = this.moveDownTimerDefault;
-  }
-
-  decrementMoveDownTimer(): void {
-    if (this.currentDirection === MovingDirection.downLeft || this.currentDirection === MovingDirection.downRight) {
-      this.moveDownTimer--;
+      this.enemyBulletController.shoot(
+        enemy.x + enemy.width / 2,
+        enemy.y,
+        -3,
+        10,
+      );
+      this.fireBulletTimer = this.fireBulletTimerDefault;
     }
   }
 
@@ -84,10 +82,10 @@ export default class EnemyController {
   }
 
   drawEnemies(ctx: CanvasRenderingContext2D): void {
-    this.enemyRows.flat().forEach(enemy => {
+    this.enemyRows.flat().forEach((enemy) => {
       enemy.move(this.xVelocity, this.yVelocity);
       enemy.draw(ctx);
-    })
+    });
   }
 
   createEnemies(): void {
@@ -95,14 +93,16 @@ export default class EnemyController {
       this.enemyRows[index] = [];
       row.forEach((enemyNumber, eIndex) => {
         if (enemyNumber > 0) {
-          this.enemyRows[index].push(new Enemy(eIndex * 50, index * 35, enemyNumber));
+          this.enemyRows[index].push(
+            new Enemy(eIndex * 50, index * 35, enemyNumber),
+          );
         }
-      })
-    })
+      });
+    });
   }
 
   collideWith(sprite: Bullet): boolean {
-    return this.enemyRows.flat().some(enemy => enemy.collideWith(sprite));
+    return this.enemyRows.flat().some((enemy) => enemy.collideWith(sprite));
   }
 
   updateVelocityAndDirection(): void {
@@ -132,6 +132,19 @@ export default class EnemyController {
           break;
         }
       }
+    }
+  }
+
+  resetMoveDownTimer(): void {
+    if (this.moveDownTimer <= 0) this.moveDownTimer = this.moveDownTimerDefault;
+  }
+
+  decrementMoveDownTimer(): void {
+    if (
+      this.currentDirection === MovingDirection.downLeft ||
+      this.currentDirection === MovingDirection.downRight
+    ) {
+      this.moveDownTimer--;
     }
   }
 }

@@ -12,17 +12,24 @@ export default class Enemy {
     this._x = x;
     this._y = y;
     this.image = new Image();
-    this.image.src = `/src/assets/images/enemy${imageNumber}.png`;
+    this.image.src = `/assets/images/enemy${imageNumber}.png`;
   }
 
-  get x(): number { return this._x }
-  get y(): number { return this._y }
-  get width(): number { return this._width }
-  get height(): number { return this._height }
-
+  get x(): number {
+    return this._x;
+  }
+  get y(): number {
+    return this._y;
+  }
+  get width(): number {
+    return this._width;
+  }
+  get height(): number {
+    return this._height;
+  }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    ctx.drawImage(this.image, this._x, this._y, this._width, this._height)
+    ctx.drawImage(this.image, this._x, this._y, this._width, this._height);
   }
 
   move(xVelocity: number, yVelocity: number): void {
@@ -31,9 +38,11 @@ export default class Enemy {
   }
 
   collideWith(sprite: Bullet) {
-    return this._x + this._width > sprite.x &&
+    return (
+      this._x + this._width > sprite.x &&
       this._x < sprite.x + sprite.width &&
       this._y + this.height > sprite.y &&
-      this._y < sprite.y + sprite.height;
+      this._y < sprite.y + sprite.height
+    );
   }
 }
