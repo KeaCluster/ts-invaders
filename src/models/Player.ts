@@ -19,7 +19,7 @@ export default class Player implements Sprite {
     this._x = this.canvas.width / 2;
     this._y = this.canvas.height - 72;
     this._image = new Image();
-    this._image.src = "/assets/images/player.png";
+    this._image.src = "assets/images/player.png";
 
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);

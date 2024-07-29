@@ -12,7 +12,7 @@ export default class Enemy {
     this._x = x;
     this._y = y;
     this.image = new Image();
-    this.image.src = `/assets/images/enemy${imageNumber}.png`;
+    this.image.src = `assets/images/enemy${imageNumber}.png`;
   }
 
   get x(): number {

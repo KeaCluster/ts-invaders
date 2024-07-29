@@ -4,7 +4,7 @@ import EnemyController from "./controllers/EnemyController";
 import Player from "./models/Player";
 
 const background = new Image();
-background.src = "/assets/images/background.jpg";
+background.src = "assets/images/background.jpg";
 
 export class GameEngine {
   private lastFrameTime = 0;
