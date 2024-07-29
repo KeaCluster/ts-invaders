@@ -1,5 +1,4 @@
 import { GameEngine } from "./GameEngine";
-import "./styles/style.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="main">
