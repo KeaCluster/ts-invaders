@@ -17,15 +17,6 @@
           "value": "text/css"
         }
       ]
-    },
-    {
-      "source": "/(.*)\\.wasm",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/wasm"
-        }
-      ]
     }
   ]
 }
