@@ -1,6 +1,6 @@
-import MovingDirection from "../utils/MovingDirection.ts";
-import Enemy from "../models/Enemy.ts";
 import Bullet from "../models/Bullet.ts";
+import Enemy from "../models/Enemy.ts";
+import MovingDirection from "../utils/MovingDirection.ts";
 import { createEnemyMap } from "../utils/enemyMap.ts";
 import BulletController from "./BulletController.ts";
 
@@ -59,13 +59,15 @@ export default class EnemyController {
     if (this.fireBulletTimer <= 0) {
       const allEnemies = this.enemyRows.flat();
       const enemyIndex = Math.floor(Math.random() * allEnemies.length);
-      const enemy: Enemy = allEnemies[enemyIndex];
-      this.enemyBulletController.shoot(
-        enemy.x + enemy.width / 2,
-        enemy.y,
-        -3,
-        10,
-      );
+      const enemy = allEnemies[enemyIndex];
+      if (enemy) {
+        this.enemyBulletController.shoot(
+          enemy.x + enemy.width / 2,
+          enemy.y,
+          -3,
+          10,
+        );
+      }
       this.fireBulletTimer = this.fireBulletTimerDefault;
     }
   }
@@ -93,7 +95,7 @@ export default class EnemyController {
       this.enemyRows[index] = [];
       row.forEach((enemyNumber, eIndex) => {
         if (enemyNumber > 0) {
-          this.enemyRows[index].push(
+          (this.enemyRows[index] = this.enemyRows[index] || []).push(
             new Enemy(eIndex * 50, index * 35, enemyNumber),
           );
         }
@@ -111,7 +113,10 @@ export default class EnemyController {
         this.xVelocity = this.defaultXVelocity;
         this.yVelocity = 0;
         const rightMostEnemy = enemyRow[enemyRow.length - 1];
-        if (rightMostEnemy.x + rightMostEnemy.width >= this.canvas.width) {
+        if (
+          rightMostEnemy &&
+          rightMostEnemy.x + rightMostEnemy.width >= this.canvas.width
+        ) {
           this.currentDirection = MovingDirection.downLeft;
           break;
         }
@@ -123,7 +128,7 @@ export default class EnemyController {
         this.xVelocity = -this.defaultXVelocity;
         this.yVelocity = 0;
         const leftMostEnemy = enemyRow[0];
-        if (leftMostEnemy.x <= 0) {
+        if (leftMostEnemy && leftMostEnemy.x <= 0) {
           this.currentDirection = MovingDirection.downRight;
           break;
         }
