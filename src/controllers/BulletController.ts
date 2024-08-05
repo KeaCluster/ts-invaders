@@ -1,5 +1,5 @@
-import Bullet from "../models/Bullet";
-import { Sprite } from "../models/Sprite";
+import Bullet from "../models/Bullet.ts";
+import { Sprite } from "../models/Sprite.ts";
 
 export default class BulletController {
   bullets: Bullet[];

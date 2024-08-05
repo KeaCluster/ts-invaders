@@ -1,5 +1,5 @@
-import BulletController from "../controllers/BulletController";
-import { Sprite } from "./Sprite";
+import BulletController from "../controllers/BulletController.ts";
+import { Sprite } from "./Sprite.ts";
 
 export default class Player implements Sprite {
   private readonly _width: number = 40;

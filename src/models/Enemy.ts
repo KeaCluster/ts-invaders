@@ -1,4 +1,4 @@
-import Bullet from "./Bullet";
+import Bullet from "./Bullet.ts";
 
 export default class Enemy {
   private readonly _width: number = 44;

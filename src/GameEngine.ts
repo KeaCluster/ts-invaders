@@ -1,7 +1,7 @@
-import { GameState } from "./models/GameState";
-import BulletController from "./controllers/BulletController";
-import EnemyController from "./controllers/EnemyController";
-import Player from "./models/Player";
+import { GameState } from "./models/GameState.ts";
+import BulletController from "./controllers/BulletController.ts";
+import EnemyController from "./controllers/EnemyController.ts";
+import Player from "./models/Player.ts";
 
 const background = new Image();
 background.src = "assets/images/background.jpg";

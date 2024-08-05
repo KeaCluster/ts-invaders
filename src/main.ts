@@ -1,4 +1,4 @@
-import { GameEngine } from "./GameEngine";
+import { GameEngine } from "./GameEngine.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="main">
