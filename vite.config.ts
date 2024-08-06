@@ -2,5 +2,9 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/ts-invaders/",
+  base: "./",
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+  },
 });
