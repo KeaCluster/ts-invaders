@@ -22,10 +22,10 @@ Space invaders but with TypeScript
 
 1. Some shared methods can be refactored
 2. Maybe an algorithm to make enemies appear with a pyramid-like internal structure
-   a. Something like heavy infantry at the center or stuff like that.
+   * Something like heavy infantry at the center or stuff like that.
 3. Levels
-   a. Algorithm should adjust to levels
-   b. What the [] am I even saying
+   * Algorithm should adjust to levels
+   * What the [] am I even saying
 4. lmao this is delusional
 
 ## Idk
