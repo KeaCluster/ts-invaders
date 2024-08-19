@@ -13,7 +13,7 @@
 
 Space invaders but with TypeScript
 
-- Vanilla TS
+- TS
 - Refactor and migration from [og project](https://github.com/KeaCluster/spaceInvaders) from a few years back
 - Might keep it simple and clean
 - Might not and add more stuff

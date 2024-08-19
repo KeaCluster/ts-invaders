@@ -2,7 +2,7 @@ import { GameEngine } from "./GameEngine";
 import "./styles/style.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
+  <div class="main">
     <canvas id="game"></canvas>
   </div>
 `;
